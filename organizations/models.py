@@ -19,4 +19,4 @@ class Organization(models.Model):
 class Position(models.Model):
     name = models.CharField(max_length=40)
     organization = models.ForeignKey(Organization, related_name='profiles', on_delete=models.CASCADE)
-    profile = models.ForeignKey(Profile, related_name='user', null=True, on_delete=models.SET_NULL)
+    profile = models.ForeignKey(Profile, related_name='positions', null=True, on_delete=models.SET_NULL)
