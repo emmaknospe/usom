@@ -22,6 +22,9 @@
 
 
   <div class="panel-body">
-
+    {% for organization in profile.organizations.all %}
+       <!-- <a href="{% url  'organization-view' organization_id=organization.id %}"> {{ organization.name }}</a> -->
+        {% include 'organization_list_view.html' %}
+    {% endfor %}
   </div>
     {% endblock %} 
