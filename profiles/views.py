@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
 from accounts.forms import CustomUserCreationForm
+from profiles.Forms import ProfileForm
 from profiles.models import Profile
 
 
@@ -10,12 +11,14 @@ def profile_view(request, profile_id):
     return render(request, "Profile.html", {"profile": profile})
 
 def create_profile(request):
-    def register(request):
         if request.POST:
-            form = CustomUserCreationForm(request.POST)
+            form = ProfileForm(request.POST)
             if form.is_valid():
-                form.save()
+                profile = form.save(commit=False)
+                profile.save()
+                request.user.profile = profile
+                request.user.save()
                 return redirect('login')
         else:
-            form = CustomUserCreationForm()
-        return render(request, 'registration/register.html', {"form": form})
+            form = ProfileForm()
+        return render(request, 'forms/base-form.html', {"form": form, "form_title": "Create Profile", "form_action": "Create Profile"})
