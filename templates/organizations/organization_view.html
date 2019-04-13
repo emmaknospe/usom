@@ -6,30 +6,30 @@
     <div class="panel">
         <div class="panel-header",>
             <div class="panel-title">
+                <div class="float-right">
+                    {% if is_member %}
+                        <a class="btn" href="{% url 'organization-join-tab' tab=tab organization_id=organization.id %}"><i class="fas fa-minus"></i></a>
+                    {% else %}
+                        <a class="btn" href="{% url 'organization-join-tab' tab=tab organization_id=organization.id %}"><i class="fas fa-plus"></i></a>
+                    {% endif %}
+                </div>
                 <h3>{{ organization.name }}</h3>
+
             </div>
         </div>
         <div class="panel-nav">
-      <ul class="tab tab-block">
-          <li class="tab-item active">
-              <a href="#">About</a>
-          </li>
-          </li>
-          <li class="tab-item">
-              <a href="#" class="inactive">Members</a>
-          </li>
-          <li class="tab-item">
-              <a href="#" class="inactive">Charter</a>
-          </li>
-      </ul>
-    <!-- navigation components: tabs, breadcrumbs or pagination -->
-  </div>
-  <div class="panel-body">
-      {{ organization.description }}
-  </div>
-  <div class="panel-footer">
-    <!-- buttons or inputs -->
-  </div>
+          {% block org-nav %}
+
+          {% endblock %}
+        </div>
+          <div class="panel-body">
+              {% block org-content %}
+
+              {% endblock %}
+          </div>
+          <div class="panel-footer">
+            <!-- buttons or inputs -->
+          </div>
     </div>
 </div>
     <div class="column col-6">

@@ -6,10 +6,21 @@ from organizations.forms import OrganizationForm
 from organizations.models import Organization
 
 
-def organization_view(request, organization_id):
-    print(organization_id)
+def organization_view(request, organization_id, tab='about'):
     organization = get_object_or_404(Organization, pk=organization_id)
-    return render(request, 'organizations/organization_view.html', {'organization': organization})
+    is_member = False
+    if request.user.is_authenticated and request.user.profile:
+        if request.user.profile in organization.members:
+            is_member = True
+    return render(request, 'organizations/organization_view_' + tab + '.html', {'organization': organization,
+                                                                                'tab': tab,
+                                                                                'is_member': is_member})
+
+@login_required
+def organization_join(request, organization_id, tab='about'):
+    organization = get_object_or_404(Organization, pk=organization_id)
+    organization.members.add(request.user.profile)
+    return redirect('organization-view', organization_id=organization_id, tab=tab)
 
 
 @login_required
