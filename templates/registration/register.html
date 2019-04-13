@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="columns">
+        <div class="column col-6 col-mx-auto">
+            <div class="panel">
+                <div class="panel-header">
+                    <h3>Register</h3>
+                </div>
+                <form method="post">
+                    <div class="panel-body">
+                        Please enter your Carleton email address as your username.
+                        {% csrf_token %}
+                        {{ form.as_p }}
+
+                    </div>
+                    <div class="panel-footer">
+                        <button class="btn" type="submit">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
