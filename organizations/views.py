@@ -7,8 +7,9 @@ from organizations.models import Organization
 
 
 def organization_view(request, organization_id):
-    return render('organizations/organization_view.html', {'organization': get_object_or_404(Organization,
-                                                                                             id=organization_id)})
+    print(organization_id)
+    organization = get_object_or_404(Organization, pk=organization_id)
+    return render(request, 'organizations/organization_view.html', {'organization': organization})
 
 
 @login_required

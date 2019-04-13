@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="columns">
+<div class="column col-6">
+    <div class="panel">
+        <div class="panel-header",>
+            <div class="panel-title">
+                <h3>{{ organization.name }}</h3>
+            </div>
+        </div>
+        <div class="panel-nav">
+      <ul class="tab tab-block">
+          <li class="tab-item active">
+              <a href="#">About</a>
+          </li>
+          </li>
+          <li class="tab-item">
+              <a href="#" class="inactive">Members</a>
+          </li>
+          <li class="tab-item">
+              <a href="#" class="inactive">Charter</a>
+          </li>
+      </ul>
+    <!-- navigation components: tabs, breadcrumbs or pagination -->
+  </div>
+  <div class="panel-body">
+      {{ organization.description }}
+  </div>
+  <div class="panel-footer">
+    <!-- buttons or inputs -->
+  </div>
+    </div>
+</div>
+    <div class="column col-6">
+        Recommended Stuff
+    </div>
+</div>
+{% endblock %}
