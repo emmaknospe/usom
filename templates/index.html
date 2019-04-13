@@ -3,5 +3,46 @@
 {% block header_content %}
 {% endblock %}
 {% block content %}
-    Index page
+    <div class="columns">
+        <div class="column col-mx-auto col-6">
+            {% if user.is_authenticated %}
+            {% else %}
+                <div class="columns">
+                    <div class="column text-center">
+                        <div class="card">
+                            <div style="font-size: 64px; padding:24px;" class="bg-primary">
+                                <i class="fas fa-sign-in-alt"></i>
+                            </div>
+                            <div class="card-header">
+                                <div class="card-title h5">Log In</div>
+                            </div>
+                            <div class="card-body">
+                                Have an account? Log in here!
+                            </div>
+                            <div class="card-footer">
+                                <a href="{% url "login" %}" class="btn btn-primary">Login</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divider-vert" data-content="OR"></div>
+                    <div class="column text-center">
+                        <div class="card">
+                            <div style="font-size: 64px; padding:24px;" class="bg-primary">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <div class="card-header">
+                                <div class="card-title h5">Register</div>
+                            </div>
+                            <div class="card-body">
+                                Don't have an account? Get started!
+                            </div>
+                            <div class="card-footer">
+                                <a href="{% url "register" %}" class="btn btn-primary">Register</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

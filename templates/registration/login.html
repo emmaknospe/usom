@@ -1,20 +1,27 @@
 {% extends 'base.html' %}
-{% block title %}
-    Login
-{% endblock %}
-{% block header %}
-    USOM
-{% endblock %}
 {% block content %}
-    <div>
-        Please enter your Carleton email address as your username, or <a href="{% url 'register' %}">register</a> if
-        you have not yet registered.
-        <form method="post">
-              {% csrf_token %}
-              {{ form.as_p }}
-              <button class="btn" type="submit">Login</button>
-        </form>
-        <br>
-        <p><a href="{% url "password_reset" %}">Forgot your password?</a></p>
+    <div class="columns">
+        <div class="column col-6 col-mx-auto">
+            <div class="panel">
+                <div class="panel-header">
+                    <h3>Login</h3>
+                </div>
+                <form method="post">
+                    <div class="panel-body">
+                        Don't have an account yet? <a href="{% url 'register' %}">Register</a>
+                        {% csrf_token %}
+                        <label for="id_username" class="form-label">Username:</label>
+                        <input type='text' id='id_username' name='username' class="form-input">
+                        <label for="id_password" class="form-label">Password:</label>
+                        <input type='password' id='id_password' name='password' class="form-input">
+                        <br>
+                        <p><a href="{% url "password_reset" %}">Forgot your password?</a></p>
+                    </div>
+                    <div class="panel-footer">
+                        <button class="btn" type="submit">Log In</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 {% endblock %}
