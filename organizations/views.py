@@ -17,10 +17,10 @@ def organization_view(request, organization_id, tab='about'):
                                                                                 'is_member': is_member})
 
 
-@login_required
-def organization_search(request):
-    pass
-    # TODO finish
+def get_organizations_by_name(request):
+    name = request.GET['name']
+    organizations = Organization.objects.filter(name__istartswith=name)
+    return render(request, 'organizations/organizations_search_list.html', {'organizations': organizations})
 
 
 

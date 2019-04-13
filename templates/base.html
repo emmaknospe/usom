@@ -5,15 +5,23 @@
     <title>USOM</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/spectre.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <script src="{% static 'javascript/jquery-3.3.1.js' %}"></script>
     {% block header_content %}
     {% endblock %}
+    <script src="{% static 'javascript/search.js' %}"></script>
 </head>
 <body>
     <header class="navbar m-2">
         <section class="navbar-section">
             <a href="{% url "index" %}" class="navbar-brand mr-2">USOM</a>
+            <span class="nav-item search" style="margin-left: 25px;">
+                <input id='id_search' type="text" class="form-input" style="width: 300px;" placeholder="Search for organizations...">
+                <div id="search-dropdown-menu" class="search-dropdown-menu">
+
+                </div>
+            </span>
         </section>
         <section class="navbar-section">
             <i class="mr-2">{{ VERSION }}</i>
@@ -32,5 +40,47 @@
         {% block content %}
         {% endblock %}
     </div>
+    <script>
+        $(function() {
+        $('#id_search').on('input', function() {
+                let value = $(this).val();
+                let input_element = this;
+                if (value !== "") {
+                    $.get('{% url 'get-organizations-by-name' %}', {'name': value}, function(data) {
+                        $("#search-dropdown-menu").html(data).prop("hidden", false);
+                        let highlighted_index = 0;
+                        let autocomplete_recommendations =
+                            $(".search-recommendation");
+                        let list_length = autocomplete_recommendations.length;
+                        $(input_element).keydown(function(event) {
+                            if (event.keyCode === 40) {
+                                highlighted_index++;
+                                event.preventDefault();
+                            } else if (event.keyCode === 38) {
+                                highlighted_index--;
+                                event.preventDefault();
+                            } else if (event.keyCode === 13) {
+                                if (highlighted_index > 0) {
+                                    value = autocomplete_recommendations.eq(highlighted_index - 1).attr("data-value");
+                                    window.location = value;
+
+                                }
+                                event.preventDefault();
+                            }
+                            if (highlighted_index === list_length + 1) {
+                                highlighted_index = 0;
+                            }
+                            autocomplete_recommendations.removeClass("active");
+                            if (highlighted_index > 0) {
+                                autocomplete_recommendations.eq(highlighted_index - 1).addClass("active")
+                            }
+                        });
+                    })
+                } else {
+                    $("#search-dropdown-menu").prop("hidden", true).html("");
+                }
+            });
+        });
+    </script>
 </body>
 </html>

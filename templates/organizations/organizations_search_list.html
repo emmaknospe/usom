@@ -1,0 +1,11 @@
+{% if organizations %}
+    <ul class="menu">
+        {% for organization in organizations %}
+            <li class="menu-item">
+                <a class="search-recommendation c-hand"
+                   data-value="{% url 'organization-view' organization_id=organization.id %}"
+                   href="{% url 'organization-view' organization_id=organization.id %}">{{ organization.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
