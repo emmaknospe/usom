@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>USOM</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/spectre.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <script src="{% static 'javascript/jquery-3.3.1.js' %}"></script>
+    {% block header_content %}
+    {% endblock %}
+</head>
+<body>
+    <header class="navbar m-2">
+        <section class="navbar-section">
+            <a href="{% url "index" %}" class="navbar-brand mr-2">USOM</a>
+        </section>
+        <section class="navbar-section">
+            <i class="mr-2">{{ VERSION }}</i>
+            {% if user.is_authenticated %}
+                <a href="{% url "logout" %}" class="btn btn-link">Logout</a>
+            {% else %}
+                <a href="{% url "login" %}" class="btn btn-link">Login</a>
+                <a href="{% url "register" %}" class="btn btn-link">Register</a>
+            {% endif %}
+
+        </section>
+    </header>
+    <div class="divider"></div>
+    <div class="columns mt-2 mb-2"></div>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
