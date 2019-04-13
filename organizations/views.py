@@ -10,18 +10,36 @@ def organization_view(request, organization_id, tab='about'):
     organization = get_object_or_404(Organization, pk=organization_id)
     is_member = False
     if request.user.is_authenticated and request.user.profile:
-        if request.user.profile in organization.members:
+        if request.user.profile in organization.members.all():
             is_member = True
     return render(request, 'organizations/organization_view_' + tab + '.html', {'organization': organization,
                                                                                 'tab': tab,
                                                                                 'is_member': is_member})
 
+
+@login_required
+def organization_search(request):
+    pass
+    # TODO finish
+
+
+
+
 @login_required
 def organization_join(request, organization_id, tab='about'):
     organization = get_object_or_404(Organization, pk=organization_id)
     organization.members.add(request.user.profile)
-    return redirect('organization-view', organization_id=organization_id, tab=tab)
+    organization.save()
+    request.user.save()
+    return redirect('organization-view-tab', organization_id=organization_id, tab=tab)
 
+@login_required
+def organization_leave(request, organization_id, tab='about'):
+    organization = get_object_or_404(Organization, pk=organization_id)
+    organization.members.remove(request.user.profile)
+    organization.save()
+    request.user.save()
+    return redirect('organization-view-tab', organization_id=organization_id, tab=tab)
 
 @login_required
 def create_organization(request):
