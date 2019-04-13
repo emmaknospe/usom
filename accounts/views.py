@@ -3,7 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from accounts.forms import CustomUserCreationForm, CustomAuthenticationForm
+from accounts.forms import CustomUserCreationForm
 
 
 def register(request):
