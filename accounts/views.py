@@ -1,11 +1,20 @@
-from django.shortcuts import render
+import django.contrib.auth as auth
+from django.contrib.auth.forms import AuthenticationForm
+from django.shortcuts import render, redirect
 
 # Create your views here.
-from accounts.forms import CustomUserCreationForm
+from accounts.forms import CustomUserCreationForm, CustomAuthenticationForm
 
 
 def register(request):
-    return render(request, 'registration/register.html', {"form": CustomUserCreationForm()})
+    if request.POST:
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'registration/register.html', {"form": form})
 
 
 def link_profile(request):
