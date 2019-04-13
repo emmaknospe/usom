@@ -1,0 +1,15 @@
+<div class="tile" style="display: table; width: 100%;">
+    <div class="tile-icon" style="height: 100%; width: 80px; vertical-align: middle; display: table-cell;">
+        <figure class="avatar avatar-xl">
+            <img src="{{ profile.pic_url }}">
+        </figure>
+    </div>
+    <div class="tile-content" style="padding-top: 8px;">
+        {{ profile.first_name }} {{ profile.last_name }}
+        <br><small>{{ profile.class_year }}</small>
+    </div>
+
+    <div class="tile-action p-2" style="height:100%; width: 40px; vertical-align: middle; display: table-cell;">
+        <a class="btn btn-primary" href="{% url 'profile-view' profile_id=profile.id %}">Profile</a>
+    </div>
+</div>

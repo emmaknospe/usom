@@ -8,9 +8,9 @@
             <div class="panel-title">
                 <div class="float-right">
                     {% if is_member %}
-                        <a class="btn" href="{% url 'organization-join-tab' tab=tab organization_id=organization.id %}"><i class="fas fa-minus"></i></a>
+                        <a class="btn" href="{% url 'organization-leave' tab=tab organization_id=organization.id %}"><i class="fas fa-minus"></i></a>
                     {% else %}
-                        <a class="btn" href="{% url 'organization-join-tab' tab=tab organization_id=organization.id %}"><i class="fas fa-plus"></i></a>
+                        <a class="btn" href="{% url 'organization-join' tab=tab organization_id=organization.id %}"><i class="fas fa-plus"></i></a>
                     {% endif %}
                 </div>
                 <h3>{{ organization.name }}</h3>

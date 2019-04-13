@@ -14,5 +14,8 @@
     </ul>
 {% endblock %}
 {% block org-content %}
-    Members
+        <div style="margin-top: 20px;"></div>
+    {% for profile in organization.members.all %}
+        {% include 'profile_list_view.html' %}
+    {% endfor %}
 {% endblock %}
