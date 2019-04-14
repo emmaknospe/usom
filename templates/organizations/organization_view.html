@@ -9,6 +9,7 @@
                 <div class="float-right">
                     {% if is_member %}
                         <a class="btn" href="{% url 'organization-leave' tab=tab organization_id=organization.id %}"><i class="fas fa-minus"></i></a>
+                        <a class="btn" href="{{ organization.get_all_emails }}"><i class="fas fa-envelope"></i></a>
                     {% else %}
                         <a class="btn" href="{% url 'organization-join' tab=tab organization_id=organization.id %}"><i class="fas fa-plus"></i></a>
                     {% endif %}
@@ -33,7 +34,19 @@
     </div>
 </div>
     <div class="column col-6">
-        Recommended Stuff
+        <h4>Similar Organizations:</h4>
+        {% for rec in organization.get_recommended_organizations %}
+            <table>
+                <tr>
+                    <td>
+                        <a class="btn" href="{% url 'organization-view' organization_id=rec.id %}">{{ rec.name }}</a>
+                    </td>
+                    <td>
+                        Similarity Score: {{ rec.relevance|floatformat:0}}%
+                    </td>
+                </tr>
+            </table>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

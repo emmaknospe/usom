@@ -17,7 +17,7 @@ def create_profile(request):
                 profile.save()
                 request.user.profile = profile
                 request.user.save()
-                return redirect('profile-view', {"profile": profile})
+                return redirect('profile-view', profile_id=profile.id)
         else:
             form = ProfileForm()
         return render(request, 'forms/base-form.html', {"form": form, "form_title": "Create Profile", "form_action": "Create Profile"})

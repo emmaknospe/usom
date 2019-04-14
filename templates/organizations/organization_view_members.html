@@ -17,5 +17,10 @@
         <div style="margin-top: 20px;"></div>
     {% for profile in organization.members.all %}
         {% include 'profile_list_view.html' %}
+        {% if not forloop.last %}
+        <div class="divider" style="margin-top: 15px; margin-bottom: 15px;">
+
+        </div>
+        {% endif %}
     {% endfor %}
 {% endblock %}
