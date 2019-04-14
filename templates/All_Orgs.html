@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block header_content %}
+{% endblock %}
+{% block content %}
+    <div class="panel-header",>
+        <div class="column col-mx-auto col-6">
+
+           Carleton has {{ num }} student organizations.
+
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="column col-mx-auto col-6">
+            <div class="panel">
+                {% for organization in organizations %}
+                    {% include 'all_organization_list_view.html' %}
+                {% endfor %}
+             </div>
+        </div>
+    </div>
+{% endblock %}

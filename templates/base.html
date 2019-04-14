@@ -16,12 +16,14 @@
     <header class="navbar m-2">
         <section class="navbar-section">
             <a href="{% url "index" %}" class="navbar-brand mr-2">USOM</a>
+            <a href="{% url "get-all-organizations" %}" class="navbar-brand mr-2">All Organizations</a>
             <span class="nav-item search" style="margin-left: 25px;">
                 <input id='id_search' type="text" class="form-input" style="width: 300px;" placeholder="Search for organizations...">
                 <div id="search-dropdown-menu" class="search-dropdown-menu">
 
                 </div>
             </span>
+
         </section>
         <section class="navbar-section">
             <i class="mr-2">{{ VERSION }}</i>

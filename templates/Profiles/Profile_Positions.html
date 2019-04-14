@@ -6,8 +6,8 @@
                 <a href="{% url 'profile_view_tab' profile_id=profile.id tab='about' %}" class="inactive">About</a>
           </li>
           </li>
-          <li class="tab-item">
-            <a href="{% url 'profile_view_tab' profile_id=profile.id tab='clubs' %}" class="inactive">Clubs</a>
+          <li class="badge", data-badge={{ profile.num_orgs }}>
+            <a href="{% url 'profile_view_tab' profile_id=profile.id tab='clubs' %}" class="inactive">Organizations</a>
           </li>
           <li class="tab-item">
             <a href="{% url 'profile_view_tab' profile_id=profile.id tab='positions' %}" class="active">Positions</a>

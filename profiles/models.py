@@ -21,3 +21,6 @@ class Profile(models.Model):
 
     def initals(self):
         return self.first_name_name[0] + self.last_name[0]
+
+    def num_orgs(self):
+        return len(self.organizations.all())

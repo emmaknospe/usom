@@ -22,6 +22,11 @@ def get_organizations_by_name(request):
     organizations = Organization.objects.filter(name__istartswith=name)
     return render(request, 'organizations/organizations_search_list.html', {'organizations': organizations})
 
+def get_all_organization(request):
+    organizations = Organization.objects.order_by("name")
+    num_all_orgs = len(organizations)
+    return render(request, 'All_Orgs.html', {'organizations': organizations, "num": num_all_orgs})
+
 
 
 
