@@ -1,0 +1,10 @@
+<div style="display: table; width: 100%;">
+
+    <div style="padding-top: 8px; display:table-cell;">
+        <a href="{% url  'organization-view' organization_id=organization.id %}">{{ organization.name }}</a>
+    </div>
+
+    <div style="height:100%; width: 40px; vertical-align: middle; display: table-cell;">
+        {{ organization.description }}
+    </div>
+</div>
