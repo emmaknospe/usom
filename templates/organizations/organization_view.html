@@ -8,10 +8,14 @@
             <div class="panel-title">
                 <div class="float-right">
                     {% if is_member %}
-                        <a class="btn" href="{% url 'organization-leave' tab=tab organization_id=organization.id %}"><i class="fas fa-minus"></i></a>
-                        <a class="btn" href="{{ organization.get_all_emails }}"><i class="fas fa-envelope"></i></a>
+                        {% if is_admin %}
+                            <a class="btn" href="{% url 'organization-manage-positions' organization_id=organization.id %}">
+                                <i class="fas fa-crown" style="width: 20px;"></i></a>
+                        {% endif %}
+                        <a class="btn" href="{% url 'organization-leave' tab=tab organization_id=organization.id %}"><i style="width: 20px;" class="fas fa-minus"></i></a>
+                        <a class="btn" href="{{ organization.get_all_emails }}"><i style="width: 25px;" class="fas fa-envelope"></i></a>
                     {% else %}
-                        <a class="btn" href="{% url 'organization-join' tab=tab organization_id=organization.id %}"><i class="fas fa-plus"></i></a>
+                        <a class="btn" href="{% url 'organization-join' tab=tab organization_id=organization.id %}"><i style="width: 20px;" class="fas fa-plus"></i></a>
                     {% endif %}
                 </div>
                 <h3>{{ organization.name }}</h3>
@@ -36,16 +40,12 @@
     <div class="column col-6">
         <h4>Similar Organizations:</h4>
         {% for rec in organization.get_recommended_organizations %}
-            <table>
-                <tr>
-                    <td>
-                        <a class="btn" href="{% url 'organization-view' organization_id=rec.id %}">{{ rec.name }}</a>
-                    </td>
-                    <td>
-                        Similarity Score: {{ rec.relevance|floatformat:0}}%
-                    </td>
-                </tr>
-            </table>
+            <div style="margin-top: 10px;margin-bottom: 10px; padding: 5px; width: 90%; height: 40px;" class="bordered">
+                <div style="float: left;"><a class="btn" href="{% url 'organization-view' organization_id=rec.id %}">
+                    <i>{{ rec.name }}</i>
+                </a></div>
+                <div style="float: right; line-height: 40px;">Similarity Score: {{ rec.relevance|floatformat:0}}%</div>
+            </div>
         {% endfor %}
     </div>
 </div>

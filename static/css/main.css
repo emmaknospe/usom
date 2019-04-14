@@ -16,6 +16,17 @@
     z-index: 10;
 }
 
+.table-element {
+  padding: 10px;
+}
 .search-recommendation {
 
+}
+
+.bordered {
+  border: .05rem solid var(--color-primary);
+}
+
+.border-top {
+  border-top: .05rem solid var(--color-primary);
 }
