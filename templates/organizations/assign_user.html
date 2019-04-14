@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="columns">
+    <div class="column col-6 col-mx-auto">
+        <span class="h5 mt-2 mb-2">Assign a member of the group to the position of "{{ position.name }}"
+            </span>
+        <a class='btn float-right' href="{% url 'organization-manage-positions' organization_id=organization.id %}">Cancel</a>
+    <br>
+    <br>
+        {% for p2 in profiles %}
+            <p><a href="{% url 'assign-user-process' profile_id=p2.id organization_id=organization.id position_id=position.id %}">
+                Assign {{ p2.first_name }} {{ p2.last_name }}
+            </a></p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

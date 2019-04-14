@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="columns">
+        <div class="column col-6 col-mx-auto">
+            <table style="width: 100%; border-collapse: collapse; " class="bordered">
+                <tr>
+                    <td class="table-element">
+                        Title
+                    </td>
+                    <td class="table-element">
+                        Occupant
+                    </td>
+                    <td class="table-element">
+                        Functions
+                    </td>
+                </tr>
+                {% for position in positions %}
+                    <tr class="border-top">
+                        <td class="table-element">
+                            {{ position.name }}
+                        </td>
+                        <td class="table-element">
+                            {% if position.profile %}{{ position.profile.first_name }} {{ position.profile.last_name }}{% else %}None{% endif %}
+                        </td>
+                        <td class="table-element">
+                            <a class="btn" href="{% url 'assign-user' position_id=position.id organization_id=organization.id %}">
+                                Assign User
+                            </a>
+                            <button class="btn">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+
+        <form method="post">
+            Add a position:
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn" type="submit">Add</button>
+            <a class="btn" href="{% url 'organization-view' organization_id=organization.id %}">Finished</a>
+        </form>
+        </div>
+
+    </div>
+{% endblock %}
