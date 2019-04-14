@@ -1,3 +1,5 @@
+import profile
+
 from django.shortcuts import render, get_object_or_404, redirect
 
 from accounts.forms import CustomUserCreationForm
@@ -21,3 +23,8 @@ def create_profile(request):
         else:
             form = ProfileForm()
         return render(request, 'forms/base-form.html', {"form": form, "form_title": "Create Profile", "form_action": "Create Profile"})
+
+def get_user_recommended(request):
+    print("recomend")
+    orgList = request.user.profile.get_recomended_orgs()
+    return render(request, 'organizations/Recommended.html', {"orgs": orgList})

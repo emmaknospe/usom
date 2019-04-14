@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Profile(models.Model):
     email = models.CharField(max_length=100)
     first_name = models.CharField(max_length=100)
@@ -24,3 +25,24 @@ class Profile(models.Model):
 
     def num_orgs(self):
         return len(self.organizations.all())
+
+    def get_recomended_orgs(self):
+        print("I'm here")
+        import organizations.models
+        orgs = self.organizations.all()
+        listOfRecs = []
+        for singOrg in orgs:
+            listOfRecs.append(singOrg.get_recommended_organizations_all())
+
+        newlist = []
+        for o2 in organizations.models.Organization.objects.all():
+            sumofrel = 0
+            for rec in listOfRecs:
+                for someRec in rec:
+                    if someRec==o2:
+                        sumofrel = sumofrel + someRec.relevance
+            newlist.append((o2, sumofrel))
+        newlist.sort(key=lambda x: x[1], reverse=True)
+        print(newlist[1:6])
+        return newlist[1:6]
+

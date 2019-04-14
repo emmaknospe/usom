@@ -4,20 +4,14 @@
 {% block content %}
     <div class="panel-header",>
         <div class="column col-mx-auto col-6">
-
-           Carleton has {{ num }} student organizations. <br>
-            <a href="{% url 'user_recon' %}">
-                    Recommended for you. <br>
-            </a>
-            All organizations:
-
-
+           Recommended Organizations:
         </div>
     </div>
     <div class="panel-body">
         <div class="column col-mx-auto col-6">
             <div class="panel">
-                {% for organization in organizations %}
+                {% for organization in orgs %}
+
                     {% include 'all_organization_list_view.html' %}
                 {% endfor %}
              </div>

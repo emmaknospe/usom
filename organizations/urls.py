@@ -10,4 +10,5 @@ urlpatterns = [
     path('organization-create/', views.create_organization, name='organization-create'),
     path('get-organizations-by-name/', views.get_organizations_by_name, name='get-organizations-by-name'),
     path("all-orgs/", views.get_all_organization, name = 'get-all-organizations')
+
 ]

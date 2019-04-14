@@ -28,6 +28,11 @@ class Organization(models.Model):
             relevance=Cast(100 * Count('members', filter=Q(members__in=self.members.all())), FloatField()) / Cast(
                 Count('members'), FloatField())).order_by('-relevance')[1:6]
 
+    def get_recommended_organizations_all(self):
+        return Organization.objects.annotate(
+            relevance=Cast(100 * Count('members', filter=Q(members__in=self.members.all())), FloatField()) / Cast(
+                Count('members'), FloatField())).order_by('-relevance')
+
 
 
 class Position(models.Model):
